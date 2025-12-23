@@ -6,6 +6,7 @@
       <p><b>Name:</b> {{ owner.name }}</p>
       <p><b>Shop:</b> {{ owner.shopName }}</p>
       <p><b>Mobile:</b> {{ owner.mobile }}</p>
+      <p><b>Location:</b> {{ owner.location }}</p>
       <p><b>Status:</b>
         <span [class]="owner.status.toLowerCase()">
           {{ owner.status }}
@@ -13,12 +14,10 @@
       </p>
     </div>
   
-    <!-- MAP PLACEHOLDER -->
-    <div class="map">
-      <p>📍 Location</p>
-      <p>Lat: {{ owner.latitude }}, Lng: {{ owner.longitude }}</p>
-      <small>(Google Map will be added later)</small>
-    </div>
+    
+  <!-- GOOGLE MAP -->
+  <div id="map"></div>
+
   
     <div class="actions">
       <button class="approve" (click)="approve()">Approve</button>
