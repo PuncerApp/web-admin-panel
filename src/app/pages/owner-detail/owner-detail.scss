@@ -1,0 +1,35 @@
+.container {
+    max-width: 800px;
+    margin: auto;
+  }
+  
+  .card {
+    background: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+  
+  #map {
+    height: 300px;
+    width: 100%;
+    border-radius: 8px;
+    margin-bottom: 16px;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 12px;
+  }
+  
+  button {
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .approve { background: green; color: #fff; }
+  .reject { background: red; color: #fff; }
+  .back { background: #ccc; }
+  

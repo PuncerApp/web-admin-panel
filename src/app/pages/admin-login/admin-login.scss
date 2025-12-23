@@ -1,0 +1,36 @@
+.login-container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eef1f5;
+  }
+  
+  .login-card {
+    width: 360px;
+    padding: 30px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+  
+  input {
+    width: 100%;
+    margin-bottom: 12px;
+    padding: 10px;
+  }
+  
+  button {
+    width: 100%;
+    background: #0d47a1;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .error {
+    color: red;
+    margin-top: 10px;
+  }
+  

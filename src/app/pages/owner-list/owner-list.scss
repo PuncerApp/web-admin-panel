@@ -1,0 +1,19 @@
+.table {
+    width: 100%;
+    background: #fff;
+    border-collapse: collapse;
+  }
+  
+  th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .pending { color: orange; }
+  .approved { color: green; }
+  .rejected { color: red; }
+  
+  button {
+    margin-right: 6px;
+  }
+  

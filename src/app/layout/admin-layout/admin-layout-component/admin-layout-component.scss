@@ -1,0 +1,17 @@
+.admin-wrapper {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .admin-body {
+    flex: 1;
+    display: flex;
+  }
+  
+  .content {
+    flex: 1;
+    padding: 24px;
+    background: #f5f6fa;
+  }
+  

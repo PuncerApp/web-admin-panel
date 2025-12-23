@@ -1,0 +1,30 @@
+<div *ngIf="owner" class="container">
+
+    <h2>Shop Owner Details</h2>
+  
+    <div class="card">
+      <p><b>Name:</b> {{ owner.name }}</p>
+      <p><b>Shop:</b> {{ owner.shopName }}</p>
+      <p><b>Mobile:</b> {{ owner.mobile }}</p>
+      <p><b>Status:</b>
+        <span [class]="owner.status.toLowerCase()">
+          {{ owner.status }}
+        </span>
+      </p>
+    </div>
+  
+    <!-- MAP PLACEHOLDER -->
+    <div class="map">
+      <p>📍 Location</p>
+      <p>Lat: {{ owner.latitude }}, Lng: {{ owner.longitude }}</p>
+      <small>(Google Map will be added later)</small>
+    </div>
+  
+    <div class="actions">
+      <button class="approve" (click)="approve()">Approve</button>
+      <button class="reject" (click)="reject()">Reject</button>
+      <button class="back" (click)="back()">Back</button>
+    </div>
+  
+  </div>
+  

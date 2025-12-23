@@ -1,0 +1,40 @@
+<h2>Shop Owners</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Shop</th>
+      <th>Mobile</th>
+      <th>Location</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let o of owners">
+      <td>{{ o.name }}</td>
+      <td>{{ o.shopName }}</td>
+      <td>{{ o.mobile }}</td>
+      <td>{{ o.location }}</td>
+      <td>
+        <span [class.pending]="o.status==='PENDING'"
+              [class.approved]="o.status==='APPROVED'"
+              [class.rejected]="o.status==='REJECTED'">
+          {{ o.status }}
+        </span>
+      </td>
+
+      <td>
+        <button *ngIf="o.status==='PENDING'" (click)="approve(o.id)">Approve</button>
+        <button *ngIf="o.status==='PENDING'" (click)="reject(o.id)">Reject</button>
+      </td>
+      <!-- <td>
+        <a routerLink="/owners/{{ o.id }}">
+          View
+        </a>
+      </td> -->
+    </tr>
+  </tbody>
+</table>
