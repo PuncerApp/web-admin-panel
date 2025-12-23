@@ -1,0 +1,7 @@
+{
+  "name": "web-admin-panel",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
