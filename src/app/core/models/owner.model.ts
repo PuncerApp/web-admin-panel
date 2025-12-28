@@ -1,8 +1,8 @@
 export interface Owner {
     id: number;
-    name: string;
+    ownerName: string;
     shopName: string;
-    location: string; 
+    address?: string;
     mobile: string;
     email?: string;
     latitude: number;

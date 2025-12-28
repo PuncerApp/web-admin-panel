@@ -3,12 +3,12 @@
     <h2>Shop Owner Details</h2>
   
     <div class="card">
-      <p><b>Name:</b> {{ owner.name }}</p>
+      <p><b>Name:</b> {{ owner.ownerName }}</p>
       <p><b>Shop:</b> {{ owner.shopName }}</p>
       <p><b>Mobile:</b> {{ owner.mobile }}</p>
-      <p><b>Location:</b> {{ owner.location }}</p>
+      <p><b>Location:</b> {{ owner.address }}</p>
       <p><b>Status:</b>
-        <span [class]="owner.status.toLowerCase()">
+        <span [class]="owner.status">
           {{ owner.status }}
         </span>
       </p>
@@ -20,8 +20,8 @@
 
   
     <div class="actions">
-      <button class="approve" (click)="approve()">Approve</button>
-      <button class="reject" (click)="reject()">Reject</button>
+      <button *ngIf="owner.status === 'PENDING'" class="approve" (click)="approve()">Approve</button>
+      <button *ngIf="owner.status === 'PENDING'" class="reject" (click)="reject()">Reject</button>
       <button class="back" (click)="back()">Back</button>
     </div>
   

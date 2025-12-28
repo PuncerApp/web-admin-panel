@@ -1,36 +1,59 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Owner } from '../models/owner.model';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class OwnerService {
 
-  private owners$ = new BehaviorSubject<Owner[]>([
-    {
-      id: 1,
-      name: 'Ravi',
-      shopName: 'Ravi Tyres',
-      mobile: '9876543210',
-      location: 'Salem',
-      latitude: 13.0827,
-      longitude: 80.2707,
-      status: 'PENDING',
-      createdAt: new Date().toISOString()
-    }
-  ]);
+  private baseUrl = '/api/owners';
+  private dataUpdated$ = new Subject<void>();
 
-  getOwners() {
-    return this.owners$.asObservable();
+  constructor(private http: HttpClient) {}
+
+  /** Observable to notify when owner data is updated */
+  get onDataUpdated(): Observable<void> {
+    return this.dataUpdated$.asObservable();
   }
 
-  getOwnerById(id: number): Owner | undefined {
-    return this.owners$.value.find(o => o.id === id);
+  /** Notify subscribers that data has been updated */
+  notifyDataUpdated(): void {
+    this.dataUpdated$.next();
   }
 
-  updateStatus(id: number, status: Owner['status']) {
-    const updated = this.owners$.value.map(o =>
-      o.id === id ? { ...o, status } : o
+   /** ADMIN PANEL – GET ALL OWNERS */
+   getOwners() {
+    return this.http.get<Owner[]>(this.baseUrl, {
+      observe: 'body',
+      responseType: 'json'
+    });
+  }
+
+  /** ADMIN PANEL – UPDATE STATUS */
+  updateStatus(id: number, status: Owner['status']): Observable<Owner> {
+    return this.http.put<Owner>(
+      `${this.baseUrl}/${id}/status/${status}`,
+      {}
     );
-    this.owners$.next(updated);
+  }
+
+  /** WEB OWNER APP – GET BY MOBILE */
+  getByMobile(mobile: string): Observable<Owner | null> {
+    return this.http.get<Owner | null>(
+      `${this.baseUrl}/by-mobile/${mobile}`
+    );
+  }
+
+  /** WEB OWNER APP – REGISTER */
+  registerOwner(payload: Partial<Owner>): Observable<Owner> {
+    return this.http.post<Owner>(
+      `${this.baseUrl}/register`,
+      payload
+    );
+  }
+
+  /** ADMIN – GET OWNER BY ID */
+  getOwnerById(id: number) {
+    return this.http.get<Owner>(`${this.baseUrl}/${id}`);
   }
 }

@@ -14,10 +14,10 @@
 
   <tbody>
     <tr *ngFor="let o of owners">
-      <td>{{ o.name }}</td>
+      <td>{{ o.ownerName }}</td>
       <td>{{ o.shopName }}</td>
       <td>{{ o.mobile }}</td>
-      <td>{{ o.location }}</td>
+      <td>{{ o.address }}</td>
       <td>
         <span [class.pending]="o.status==='PENDING'"
               [class.approved]="o.status==='APPROVED'"
@@ -29,12 +29,8 @@
       <td>
         <button *ngIf="o.status==='PENDING'" (click)="approve(o.id)">Approve</button>
         <button *ngIf="o.status==='PENDING'" (click)="reject(o.id)">Reject</button>
+        <a routerLink="/owners/{{ o.id }}"> View </a>
       </td>
-      <!-- <td>
-        <a routerLink="/owners/{{ o.id }}">
-          View
-        </a>
-      </td> -->
     </tr>
   </tbody>
 </table>
