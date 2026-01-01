@@ -22,11 +22,25 @@ export class AdminLoginComponent {
   ) {}
 
   login() {
-    const success = this.auth.login(this.username, this.password);
-    if (success) {
-      this.router.navigate(['/dashboard']);
-    } else {
-      this.error = 'Invalid credentials';
-    }
+    this.auth.login(this.username, this.password).subscribe({
+      next: (token: string) => {
+        this.auth.saveToken(token);
+  
+        const role = this.auth.getUserRole();
+        console.log('ROLE FROM TOKEN:', role);  
+        if (role === 'ADMIN') {
+          this.router.navigate(['/admin']);
+        }
+        else if (role === 'OWNER') {
+          this.router.navigate(['/owner']);
+        }
+        else {
+          this.router.navigate(['/access-denied']);
+        }
+      },
+      error: () => {
+        this.error = 'Invalid credentials';
+      }
+    });
   }
 }

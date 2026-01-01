@@ -29,7 +29,7 @@
       <td>
         <button *ngIf="o.status==='PENDING'" (click)="approve(o.id)">Approve</button>
         <button *ngIf="o.status==='PENDING'" (click)="reject(o.id)">Reject</button>
-        <a routerLink="/owners/{{ o.id }}"> View </a>
+        <a [routerLink]="['/admin/owners', o.id]">View</a>
       </td>
     </tr>
   </tbody>
