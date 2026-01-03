@@ -1,19 +1,183 @@
+/* 🔍 Toolbar */
+.toolbar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.toolbar input,
+.toolbar select {
+  padding: 8px 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* 📋 Table */
 .table {
-    width: 100%;
-    background: #fff;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  text-align: center;        /* ✅ CENTER ALIGN */
+  padding: 12px;
+  vertical-align: middle;   /* ✅ ROW CENTER */
+}
+
+.table th {
+  background: #f4f6fa;
+  font-weight: 600;
+}
+
+/* 🟡 Status colors */
+.status {
+  font-weight: 600;
+}
+
+.status.pending { color: orange; }
+.status.approved { color: green; }
+.status.rejected { color: red; }
+
+/* 🔘 Actions */
+.actions {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+}
+
+.actions button {
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+
+/* 🔍 Toolbar */
+.toolbar {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+
+  input, select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
   }
-  
-  th, td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
-  }
-  
-  .pending { color: orange; }
-  .approved { color: green; }
-  .rejected { color: red; }
-  
-  button {
-    margin-right: 6px;
-  }
-  
+}
+
+/* 📊 Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 12px;
+  text-align: left;
+}
+
+th.center, td.center {
+  text-align: center;
+}
+
+/* 🟢 Status badges */
+.status {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.PENDING {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.APPROVED {
+  background: #d4edda;
+  color: #155724;
+}
+
+.REJECTED {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+/* 🎯 Action Icons */
+.actions i {
+  margin: 0 6px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.actions i:hover {
+  transform: scale(1.2);
+  opacity: 0.85;
+}
+
+/* 🎨 Icon colors */
+.view {
+  color: #0d6efd;
+}
+
+.approve {
+  color: #198754;
+}
+
+.reject {
+  color: #dc3545;
+}
+
+.delete {
+  color: #6c757d;
+}
+
+.pagination-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin-top: 20px;
+}
+
+.page-btn {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 10px;
+  border-radius: 8px;
+  border: 1px solid #dcdfe6;
+  background: #fff;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.page-btn:hover:not(:disabled) {
+  background: #f0f4ff;
+  border-color: #4f46e5;
+  color: #4f46e5;
+}
+
+.page-btn.active {
+  background: #4f46e5;
+  color: #fff;
+  border-color: #4f46e5;
+  font-weight: 600;
+}
+
+.page-btn.nav {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.page-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.pagination button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

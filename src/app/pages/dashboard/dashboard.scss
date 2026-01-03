@@ -27,3 +27,34 @@
   .approved { border-left: 4px solid green; }
   .rejected { border-left: 4px solid red; }
   
+
+
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+  
+  .card {
+    padding: 16px;
+    border-radius: 8px;
+    font-weight: bold;
+  }
+  
+  .pending { background: #fff7ed; }
+  .approved { background: #ecfdf5; }
+  .rejected { background: #fef2f2; }
+  
+  .charts {
+    margin-top: 32px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  
+  .chart-box {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+  }
+  

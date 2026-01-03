@@ -1,5 +1,28 @@
 <h2>Shop Owners</h2>
 
+<div class="toolbar">
+  <input
+    type="text"
+    placeholder="Search by name or mobile"
+    [(ngModel)]="searchText"
+    (input)="applyFilter()"
+  />
+
+  <select [(ngModel)]="statusFilter" (change)="applyFilter()">
+    <option value="ALL">All</option>
+    <option value="PENDING">Pending</option>
+    <option value="APPROVED">Approved</option>
+    <option value="REJECTED">Rejected</option>
+  </select>
+
+  <select [(ngModel)]="pageSize" (change)="changePageSize()">
+    <option [value]="5">5</option>
+    <option [value]="10">10</option>
+    <option [value]="20">20</option>
+  </select>
+</div>
+
+<!-- 📋 TABLE -->
 <table class="table">
   <thead>
     <tr>
@@ -7,31 +30,82 @@
       <th>Shop</th>
       <th>Mobile</th>
       <th>Location</th>
+      <th>Vehicle Type</th>
+      <th>Shop Type</th>
       <th>Status</th>
       <th>Action</th>
+      <th>View Details</th>
     </tr>
   </thead>
 
   <tbody>
-    <tr *ngFor="let o of owners">
+    <tr *ngFor="let o of paginatedOwners">
       <td>{{ o.ownerName }}</td>
       <td>{{ o.shopName }}</td>
       <td>{{ o.mobile }}</td>
-      <td>{{ o.address }}</td>
+      <td>{{ o.address || '-' }}</td>
+      <td>{{ o.vehicleType || '-' | enumTitle }}</td>
+      <td>{{ o.shopType || '-' | enumTitle }}</td>
       <td>
-        <span [class.pending]="o.status==='PENDING'"
-              [class.approved]="o.status==='APPROVED'"
-              [class.rejected]="o.status==='REJECTED'">
+        <span class="status" [ngClass]="o.status">
           {{ o.status }}
         </span>
       </td>
 
-      <td>
-        <button *ngIf="o.status==='PENDING'" (click)="approve(o.id)">Approve</button>
-        <button *ngIf="o.status==='PENDING'" (click)="reject(o.id)">Reject</button>
-        <button class="delete" (click)="delete(o.id)">Delete</button>
-        <a [routerLink]="['/admin/owners', o.id]">View</a>
+      <td class="center actions">
+        <!-- APPROVE -->
+        <i
+          *ngIf="o.status === 'PENDING'"
+          class="fa-solid fa-circle-check approve"
+          title="Approve"
+          (click)="approve(o.id)">
+        </i>
+
+        <!-- REJECT -->
+        <i
+          *ngIf="o.status === 'PENDING'"
+          class="fa-solid fa-circle-xmark reject"
+          title="Reject"
+          (click)="reject(o.id)">
+        </i>
+
+        <!-- DELETE -->
+        <i
+          class="fa-solid fa-trash delete"
+          title="Delete"
+          (click)="delete(o.id)">
+        </i>
+      </td>
+      <td>         <!-- VIEW -->
+        <i class="fa-solid fa-eye view" title="View details" [routerLink]="['/admin/owners', o.id]"></i> 
       </td>
     </tr>
   </tbody>
 </table>
+
+<!-- 📄 PAGINATION -->
+<div class="pagination-wrapper" *ngIf="totalPages > 1">
+
+  <button
+    class="page-btn nav"
+    (click)="goToPage(currentPage - 1)"
+    [disabled]="currentPage === 1">
+    ‹
+  </button>
+
+  <button
+    class="page-btn"
+    *ngFor="let p of [].constructor(totalPages); let i = index"
+    (click)="goToPage(i + 1)"
+    [class.active]="currentPage === i + 1">
+    {{ i + 1 }}
+  </button>
+
+  <button
+    class="page-btn nav"
+    (click)="goToPage(currentPage + 1)"
+    [disabled]="currentPage === totalPages">
+    ›
+  </button>
+
+</div>

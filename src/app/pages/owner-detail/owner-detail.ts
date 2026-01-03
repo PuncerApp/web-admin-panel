@@ -4,13 +4,14 @@ import { CommonModule } from '@angular/common';
 import { OwnerService } from '../../core/services/owner.service';
 import { Owner } from '../../core/models/owner.model';
 import { Subscription } from 'rxjs';
+import { EnumTitlePipe } from '../../core/pipes/enum-title.pipe';
 
 declare const google: any;
 
 @Component({
   standalone: true,
   selector: 'app-owner-detail',
-  imports: [CommonModule],
+  imports: [CommonModule, EnumTitlePipe],
   templateUrl: './owner-detail.html',
   styleUrls: ['./owner-detail.scss'], 
 })
@@ -75,24 +76,40 @@ export class OwnerDetailComponent implements OnInit, OnDestroy {
 
   loadMap() {
     if (!this.owner) return;
-
+  
     const mapElement = document.getElementById('map');
-
+    if (!mapElement) return;
+  
+    const center = {
+      lat: this.owner.latitude,
+      lng: this.owner.longitude
+    };
+  
     this.map = new google.maps.Map(mapElement, {
-      center: {
-        lat: this.owner.latitude,
-        lng: this.owner.longitude
-      },
-      zoom: 14
+      center,
+      zoom: 15,
+      disableDefaultUI: true,
+      zoomControl: true,
+      streetViewControl: false,
+      mapTypeControl: false,
+      fullscreenControl: true,
+      styles: [
+        {
+          featureType: 'poi',
+          stylers: [{ visibility: 'off' }]
+        },
+        {
+          featureType: 'transit',
+          stylers: [{ visibility: 'off' }]
+        }
+      ]
     });
-
+  
     new google.maps.Marker({
-      position: {
-        lat: this.owner.latitude,
-        lng: this.owner.longitude
-      },
+      position: center,
       map: this.map,
-      title: this.owner.shopName
+      title: this.owner.shopName,
+      animation: google.maps.Animation.DROP
     });
   }
 
@@ -103,7 +120,7 @@ export class OwnerDetailComponent implements OnInit, OnDestroy {
       next: (updatedOwner) => {
         this.owner = updatedOwner;
         this.ownerService.notifyDataUpdated();
-        this.router.navigate(['/owners']);
+        this.router.navigate(['/admin/owners']);
       },
       error: (err) => {
         console.error('Failed to approve owner', err);
@@ -119,7 +136,7 @@ export class OwnerDetailComponent implements OnInit, OnDestroy {
         next: (updatedOwner) => {
           this.owner = updatedOwner;
           this.ownerService.notifyDataUpdated();
-          this.router.navigate(['/owners']);
+          this.router.navigate(['/admin/owners']);
         },
         error: (err) => {
           console.error('Failed to reject owner', err);
@@ -129,6 +146,6 @@ export class OwnerDetailComponent implements OnInit, OnDestroy {
   }
 
   back() {
-    this.router.navigate(['/owners']);
+    this.router.navigate(['/admin/owners']);
   }
 }

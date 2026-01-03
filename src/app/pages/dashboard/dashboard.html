@@ -1,23 +1,22 @@
 <h2 class="title">Admin Dashboard</h2>
 
+<!-- CARDS -->
 <div class="cards">
-  <div class="card total">
-    <h3>Total Owners</h3>
-    <p>{{ total }}</p>
+  <div class="card total">Total: {{ total }}</div>
+  <div class="card pending">Pending: {{ pending }}</div>
+  <div class="card approved">Approved: {{ approved }}</div>
+  <div class="card rejected">Rejected: {{ rejected }}</div>
+</div>
+
+<!-- CHARTS -->
+<div class="charts">
+  <div class="chart-box">
+    <h3>Status Distribution</h3>
+    <canvas id="statusChart"></canvas>
   </div>
 
-  <div class="card pending">
-    <h3>Pending</h3>
-    <p>{{ pending }}</p>
-  </div>
-
-  <div class="card approved">
-    <h3>Approved</h3>
-    <p>{{ approved }}</p>
-  </div>
-
-  <div class="card rejected">
-    <h3>Rejected</h3>
-    <p>{{ rejected }}</p>
+  <div class="chart-box">
+    <h3>Approval Trend</h3>
+    <canvas id="approvalChart"></canvas>
   </div>
 </div>

@@ -6,17 +6,62 @@
       <p><b>Name:</b> {{ owner.ownerName }}</p>
       <p><b>Shop:</b> {{ owner.shopName }}</p>
       <p><b>Mobile:</b> {{ owner.mobile }}</p>
-      <p><b>Location:</b> {{ owner.address }}</p>
-      <p><b>Status:</b>
-        <span [class]="owner.status">
+      <p *ngIf="owner.email">
+        <b>Email:</b> {{ owner.email }}
+      </p>    
+      <p *ngIf="owner.address">
+        <b>Address:</b> {{ owner.address }}
+      </p>    
+      <p>
+        <b>Status:</b>
+        <span class="status" [ngClass]="owner.status">
           {{ owner.status }}
         </span>
+      </p>    
+      <hr />    
+      <p>
+        <b>Shop Type:</b>
+        {{ owner.shopType | enumTitle }}
+      </p>    
+      <p>
+        <b>Vehicle Type:</b>
+        {{ owner.vehicleType | enumTitle }}
       </p>
+
+      <!-- 🔧 SERVICES -->
+      <div class="services">
+        <b>Services:</b>
+
+        <span *ngIf="owner.tube" class="service-chip">Tube</span>
+        <span *ngIf="owner.tubeless" class="service-chip">Tubeless</span>
+        <span *ngIf="owner.air" class="service-chip">Air Fill</span>
+
+        <span
+          *ngIf="!owner.tube && !owner.tubeless && !owner.air"
+          class="service-chip muted">
+          No services selected
+        </span>
+      </div>
+      
     </div>
   
     
-  <!-- GOOGLE MAP -->
-  <div id="map"></div>
+    <!-- GOOGLE MAP -->
+    <div class="map-card" *ngIf="owner">
+
+      <h3 class="map-title">
+        📍 Shop Location
+      </h3>
+    
+      <div id="map" class="map-container"></div>
+    
+      <div class="coords">
+        <span>Lat: {{ owner.latitude }}</span>
+        <span>Lng: {{ owner.longitude }}</span>
+      </div>
+    
+      <a class="open-map" target="_blank"  [href]="'https://www.google.com/maps?q=' + owner.latitude + ',' + owner.longitude">Open in Google Maps </a>
+    </div>
 
   
     <div class="actions">
