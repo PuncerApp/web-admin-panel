@@ -56,4 +56,14 @@ export class OwnerService {
   getOwnerById(id: number) {
     return this.http.get<Owner>(`${this.baseUrl}/${id}`);
   }
+
+  deleteOwner(id: number) {
+    return this.http.delete(`${this.baseUrl}/${id}`);
+  }
+
+  getMyProfile(): Observable<{ status: 'PENDING' | 'APPROVED' | 'REJECTED' }> {
+    return this.http.get<{ status: 'PENDING' | 'APPROVED' | 'REJECTED' }>(
+      `${this.baseUrl}/me`
+    );
+  }
 }

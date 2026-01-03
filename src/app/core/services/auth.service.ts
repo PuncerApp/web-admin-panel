@@ -48,8 +48,8 @@ export class AuthService {
   }
 
   logout() {
-    localStorage.clear();
-    this.router.navigate(['/admin-login']);
+    localStorage.removeItem('admin_token');
+    this.router.navigate(['/login'], { replaceUrl: true });
   }
 
   getUserRole(): 'ADMIN' | 'OWNER' | null {

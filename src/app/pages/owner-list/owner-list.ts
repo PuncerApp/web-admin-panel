@@ -36,7 +36,7 @@ export class OwnerListComponent implements OnInit, OnDestroy {
       this.router.events
         .pipe(filter(event => event instanceof NavigationEnd))
         .subscribe((event: any) => {
-          if (event.url === '/owners' || event.urlAfterRedirects === '/owners') {
+          if (event.urlAfterRedirects === '/admin/owners') {
             this.loadOwners();
           }
         })
@@ -129,6 +129,24 @@ export class OwnerListComponent implements OnInit, OnDestroy {
       error: (err) => {
         console.error('Failed to reject owner', err);
         alert('Failed to reject owner. Please try again.');
+      }
+    });
+  }
+
+  delete(id: number) {
+    const confirmDelete = confirm('Are you sure you want to delete this owner?');
+    if (!confirmDelete) return;
+  
+    this.ownerService.deleteOwner(id).subscribe({
+      next: () => {
+        alert('Owner deleted successfully');
+        this.owners = [...this.owners.filter(o => o.id !== id)];
+        this.cdr.detectChanges();
+        this.ownerService.notifyDataUpdated();
+      },
+      error: (err) => {
+        console.error('Delete failed', err);
+        alert('Failed to delete owner');
       }
     });
   }

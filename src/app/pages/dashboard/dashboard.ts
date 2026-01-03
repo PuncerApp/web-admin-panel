@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.router.events
         .pipe(filter(event => event instanceof NavigationEnd))
         .subscribe((event: any) => {
-          if (event.url === '/dashboard' || event.urlAfterRedirects === '/dashboard') {
+          if (event.urlAfterRedirects === '/admin/dashboard') {
             this.loadDashboardData();
           }
         })
