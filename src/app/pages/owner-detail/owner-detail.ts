@@ -66,7 +66,7 @@ export class OwnerDetailComponent implements OnInit, OnDestroy {
           alert('Owner not found. Redirecting to owners list...');
           this.router.navigate(['/owners']);
         } else if (err.status === 0) {
-          alert('Cannot connect to server. Please check if the backend is running on http://localhost:8080');
+          alert('Cannot connect to server. Please check if the backend is running on https://svc-puncher-production.up.railway.app');
         } else {
           alert('Failed to load owner details. Please try again.');
         }

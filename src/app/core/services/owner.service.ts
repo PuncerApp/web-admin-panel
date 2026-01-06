@@ -2,11 +2,12 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { Owner } from '../models/owner.model';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment.prod';
 
 @Injectable({ providedIn: 'root' })
 export class OwnerService {
 
-  private baseUrl = '/api/owners';
+private baseUrl = `${environment.apiBaseUrl}/api/owners`;
   private dataUpdated$ = new Subject<void>();
 
   constructor(private http: HttpClient) {}

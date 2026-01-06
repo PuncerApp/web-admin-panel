@@ -8,7 +8,7 @@ export const TOKEN_KEY = 'admin_token';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
 
-  private API_URL = 'http://localhost:8080/api/auth';
+  private API_URL = 'https://svc-puncher-production.up.railway.app/api/auth';
 
   constructor(
     private http: HttpClient,
