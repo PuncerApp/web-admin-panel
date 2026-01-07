@@ -1,5 +1,5 @@
 {
-  "buildCommand": "npm run build",
+  "framework": "angular",
   "outputDirectory": "dist/web-admin-panel/browser",
   "routes": [
     {
